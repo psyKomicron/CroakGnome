@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <object class="GtkWidget">
+        <object class="GtkBox">
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            
+            <property name="halign">fill</property>
+            <property name="hexpand">0</property>
+            <property name="vexpand">1</property>
+
+            <child>
+              <object class="GtkBox">
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
+                <property name="valign">center</property>
+                <property name="orientation">1</property>
+                
+                <child>
+                  <object class="GtkScale" id="scale2">
+                    <property name="height-request">300</property>
+                    <property name="restrict-to-fill-level">0</property>
+                    <property name="fill-level">75</property>
+                    <property name="orientation">vertical</property>
+                    <property name="inverted">1</property>
+                    <property name="digits">1</property>
+                    <property name="draw-value">1</property>
+                    <property name="halign">center</property>
+                    <property name="adjustment">
+                      <object class="GtkAdjustment">
+                        <property name="upper">100</property>
+                        <property name="lower">0</property>
+                        <property name="value">20</property>
+                        <property name="step-increment">1</property>
+                        <property name="page-increment">10</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkToggleButton">
+                    <property name="halign">3</property>
+                    <property name="valign">center</property>
+                    <style>
+                      <class name="image-button"/>
+                      <class name="destructive-action"/>
+                    </style>
+
+                    <child>
+                      <object class="GtkImage">
+                        <property name="valign">4</property>
+                        <property name="icon-name">audio-volume-medium-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+    </object>
+</interface>

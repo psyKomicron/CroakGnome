@@ -1,0 +1,9 @@
+<gresources>
+    <gresource prefix="/croak/ui/">
+        <!-- text files such as XML can be compressed to save memory -->
+        <file>style.css</file>
+        <file compressed="true" preprocess="xml-stripblanks">mainwindow.glade</file>
+        <file compressed="true" preprocess="xml-stripblanks">mainwindow2.glade</file>
+        <file compressed="true" preprocess="xml-stripblanks">audiosession.glade</file>
+    </gresource>
+</gresources>
