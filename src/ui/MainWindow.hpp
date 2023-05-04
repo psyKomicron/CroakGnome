@@ -14,6 +14,9 @@ namespace Croak::UI
     private:
         std::wstring_view name{};
         Glib::RefPtr<Gtk::Builder> builder{ nullptr };
+
+        void loadAudioEndpoint();
+        void button_clicked();
     };
 }
 

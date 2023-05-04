@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <gtkmm.h>
 #include <glibmm.h>
+#include <iostream>
 
 //#include "ui/MainWindow.hpp"
 #include "ui/App.hpp"

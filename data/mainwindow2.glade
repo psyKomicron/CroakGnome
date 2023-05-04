@@ -13,7 +13,7 @@
           </object>
         </child> -->
         <child>
-          <object class="GtkButton">
+          <object class="GtkButton" id="icon_button">
             <property name="icon-name">audio-volume-medium-symbolic</property>
             <style>
               <class name="button"/>
