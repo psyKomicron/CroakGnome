@@ -1,6 +1,5 @@
 #include "MainWindow.hpp"
 #include "common/AudioController.hpp"
-#include <exception>
 
 namespace Croak::UI
 {
@@ -15,7 +14,8 @@ namespace Croak::UI
         }
         else
         {
-            button->signal_clicked().connect(
+            button->signal_clicked().connect
+            (
                 sigc::mem_fun(*this, &MainWindow::button_clicked)
             );
         }
@@ -23,16 +23,12 @@ namespace Croak::UI
 
     void MainWindow::loadAudioEndpoint()
     {
-        g_debug("This is a call to g_debug");
-
         try
         {
-            throw std::exception();
-
             Croak::Audio::AudioController controller{};
             auto name = controller.getAudioEndpoints();
 
-            auto&& button = builder->get_widget<Gtk::Button>("icon_button1");
+            auto&& button = builder->get_widget<Gtk::Button>("icon_button");
             if (!button)
             {
                 throw std::runtime_error("Button is nullptr.");
@@ -47,23 +43,19 @@ namespace Croak::UI
                 button->set_icon_name("audio-volume-low");
             }
         }
+        catch (const Glib::Error& err)
+        {
+            g_warning("(Glib::Error) Failed to load audio endpoint: %s", err.what());
+        }
         catch (const std::exception& ex)
         {
-            g_error("(std::exception) Failed to load audio endpoint: %s\n", ex.what());
+            g_warning("(std::exception) Failed to load audio endpoint: %s", ex.what());
         }
-        // catch (const Glib::Error& err)
-        // {
-        //     g_error("(Glib::Error) Failed to load audio endpoint: %s", err.what());
-        // }
-        // catch (const std::exception& ex)
-        // {
-        //     g_error("(std::exception) Failed to load audio endpoint: %s\n", ex.what());
-        // }
     }
 
     void MainWindow::button_clicked()
     {
-        g_message("Button clicked.");
+        g_debug("Button clicked.");
         
         loadAudioEndpoint();
     }
