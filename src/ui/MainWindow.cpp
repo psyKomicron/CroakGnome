@@ -27,6 +27,23 @@ namespace Croak::UI
     {
         try
         {
+            static bool pass = true;
+
+            if (pass)
+            {
+                controller.joinLoop();
+                g_message("Joined PipeWire audio loop.");
+                pass = false;
+            }
+            else
+            {
+                g_debug("PipeWire objects: ", controller.pipeWireObjects().size());
+
+                controller.quitLoop();
+                g_message("Exited PipeWire audio loop.");
+            }
+
+
             auto&& label = builder->get_widget<Gtk::Label>("title_label");
             if (label)
             {
@@ -47,13 +64,6 @@ namespace Croak::UI
 
     void MainWindow::button_clicked()
     {
-        g_message("Launching audio endpoint discovery.");
-        auto fut = std::async(
-            std::launch::async,
-            &MainWindow::loadAudioEndpoint,
-            this
-        );
-        g_message("Launched audio endpoint discovery async.");
-        //fut.get();
+        loadAudioEndpoint();
     }
 }
