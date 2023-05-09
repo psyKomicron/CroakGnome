@@ -1,6 +1,8 @@
 #include "MainWindow.hpp"
 #include "common/AudioController.hpp"
 
+#include <future>
+
 namespace Croak::UI
 {
     MainWindow::MainWindow(BaseObjectType *base, const Glib::RefPtr<Gtk::Builder>& builder) :
@@ -25,22 +27,12 @@ namespace Croak::UI
     {
         try
         {
-            Croak::Audio::AudioController controller{};
-            auto name = controller.getAudioEndpoints();
-
-            auto&& button = builder->get_widget<Gtk::Button>("icon_button");
-            if (!button)
+            auto&& label = builder->get_widget<Gtk::Label>("title_label");
+            if (label)
             {
-                throw std::runtime_error("Button is nullptr.");
-            }
-
-            if (button->get_icon_name() == "audio-volume-low")
-            {
-                button->set_icon_name("audio-volume-high");
-            }
-            else
-            {
-                button->set_icon_name("audio-volume-low");
+                auto name = controller.getAudioEndpoints();
+                Glib::ustring text{ name };
+                label->set_text(text);
             }
         }
         catch (const Glib::Error& err)
@@ -55,8 +47,13 @@ namespace Croak::UI
 
     void MainWindow::button_clicked()
     {
-        g_debug("Button clicked.");
-        
-        loadAudioEndpoint();
+        g_message("Launching audio endpoint discovery.");
+        auto fut = std::async(
+            std::launch::async,
+            &MainWindow::loadAudioEndpoint,
+            this
+        );
+        g_message("Launched audio endpoint discovery async.");
+        //fut.get();
     }
 }

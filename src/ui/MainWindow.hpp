@@ -3,6 +3,7 @@
 
 #include <gtkmm.h>
 #include <string>
+#include "common/AudioController.hpp"
 
 namespace Croak::UI
 {
@@ -14,6 +15,7 @@ namespace Croak::UI
     private:
         std::wstring_view name{};
         Glib::RefPtr<Gtk::Builder> builder{ nullptr };
+        Croak::Audio::AudioController controller{};
 
         void loadAudioEndpoint();
         void button_clicked();
