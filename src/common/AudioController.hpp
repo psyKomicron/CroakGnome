@@ -16,12 +16,12 @@ namespace Croak::Audio
     public:
         ~AudioController();
 
-        inline bool isInLoop() { return joinedLoop; };
+        inline bool running() { return joinedLoop; };
         inline std::vector<std::string> pipeWireObjects() { return pwObjects; }
 
         std::string getAudioEndpoints();
-        void joinLoop();
-        void quitLoop();
+        void start();
+        void stop();
 
     private:
         static AudioController* instance;

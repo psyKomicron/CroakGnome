@@ -31,7 +31,7 @@ namespace Croak::UI
 
             if (pass)
             {
-                controller.joinLoop();
+                controller.start();
                 g_message("Joined PipeWire audio loop.");
                 pass = false;
             }
@@ -39,7 +39,7 @@ namespace Croak::UI
             {
                 g_debug("PipeWire objects: ", controller.pipeWireObjects().size());
 
-                controller.quitLoop();
+                controller.stop();
                 g_message("Exited PipeWire audio loop.");
             }
 

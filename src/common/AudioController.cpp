@@ -12,6 +12,7 @@ namespace Croak::Audio
 {
     AudioController::~AudioController()
     {
+        stop();
     }
 
     std::string AudioController::getAudioEndpoints()
@@ -19,12 +20,12 @@ namespace Croak::Audio
         return std::string();
     }
 
-    void AudioController::joinLoop()
+    void AudioController::start()
     {
         pwThread = std::thread(&AudioController::getPWAudioObjects, this);
     }
     
-    void Croak::Audio::AudioController::quitLoop()
+    void Croak::Audio::AudioController::stop()
     {
         if (pwLoop)
         {
